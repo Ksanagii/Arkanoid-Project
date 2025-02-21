@@ -29,6 +29,11 @@ public class BallMove : MonoBehaviour
         {
             Destroy(col.gameObject);
         }
+        else if (col.gameObject.CompareTag("Morte"))
+        {
+            Destroy(gameObject);
+            Debug.Log("perdeu");
+        }
  
     }
 

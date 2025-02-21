@@ -11,12 +11,13 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
     {
         direction = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(vel * direction, 0);
+        rb.linearVelocity = new Vector2(vel * direction, 0);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -37,9 +38,9 @@ public class PlayerMove : MonoBehaviour
             {
                 // Aplique o impulso com base no hitFactor e na forca de impulso
                 Vector2 bounceDirection = new Vector2(hitFactor, 1).normalized; // Direcao para cima e para os lados
-                ballRb.velocity = bounceDirection * bounceForce; // Aplica o impulso na bola
+                ballRb.linearVelocity = bounceDirection * bounceForce; // Aplica o impulso na bola
             }
-        if (col.gameObject.CompareTag(" Debuffer"))
+        if (col.gameObject.CompareTag("debuffer"))
         {
             // algum debuff no player
         }
