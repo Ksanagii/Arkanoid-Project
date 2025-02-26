@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class BallMove : MonoBehaviour
 {
-    [SerializeField] float _velocity;
-    [SerializeField] float direction;
-    Rigidbody2D rb;
+    // Rigidbody2D rb;
+    PlayerMove playerMove;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        // rb = GetComponent<Rigidbody2D>();
+        playerMove = FindAnyObjectByType<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -31,6 +31,7 @@ public class BallMove : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Morte"))
         {
+            playerMove.death = true;
             Destroy(gameObject);
             Debug.Log("perdeu");
         }
