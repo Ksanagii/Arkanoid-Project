@@ -9,9 +9,10 @@ public class SpawnerDebuff : MonoBehaviour
 {
     // UnityEngine.Random random = new UnityEngine.Random();   
     [SerializeField] GameObject debuff;
+    GameObject instantiatedPrefab;
     float spawnTimer;
     [SerializeField] float spawnInterval;
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -20,7 +21,6 @@ public class SpawnerDebuff : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         spawnTimer += Time.deltaTime;
@@ -36,9 +36,13 @@ public class SpawnerDebuff : MonoBehaviour
     void spawnDebuff()
     {
         float randomPositionX = UnityEngine.Random.Range(transform.position.x -10, transform.position.x + 10);
-        Instantiate(debuff, new Vector3(randomPositionX, transform.position.y, transform.position.z), transform.rotation);
+        instantiatedPrefab = Instantiate(debuff, new Vector3(randomPositionX, transform.position.y, transform.position.z), transform.rotation);
+        
+        Destroy(instantiatedPrefab, 2f);
+
     }
 
+    // fazer cair bolinhas verdes que dão pontos para o player
 
 
 }

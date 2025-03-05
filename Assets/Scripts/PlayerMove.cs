@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public bool death;
-    [SerializeField] float vel;
+
+
+    [Header("Velocity and Force Values")]
+    [SerializeField] float constantVel;
+    [SerializeField] float bounceForce = 10f;
+
+    [Header("Debuff Effect Values")]
+    [SerializeField] float debuffEffectVel;
+    [SerializeField] float debuffTimerConstant;
+    float vel;
     float direction;
     Rigidbody2D rb;
-    [SerializeField] float bounceForce = 10f;
-    [SerializeField] float debuffTimerConstant;
     float debuffTimer;
-    [SerializeField] bool debuffActive;
-    [SerializeField] float debuffEffectVel;
+    bool debuffActive;
+    [HideInInspector] static public bool death;
+    Animator anim;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         death = false;
         debuffActive = false;
+        anim.SetBool("Stun", false);
+        vel = constantVel;
     }
 
     void Update()
@@ -27,19 +37,21 @@ public class PlayerMove : MonoBehaviour
         rb.linearVelocity = new Vector2(vel * direction, 0);
         if(death && vel > 0)
         {
+            Debug.Log("morreu");
             vel = 0;
+            
         }
 
-        if(debuffActive)
+        if(debuffActive && !death)
         {
-            Debug.Log("debuffer ativado");
-            
+
             debuffTimer -= Time.deltaTime;
             vel = debuffEffectVel;
             if(debuffTimer <= 0)
             {
                 debuffActive = false;
-                vel = 9;
+                vel = constantVel;
+                anim.SetBool("Stun", false);
                 Debug.Log("debuffer desativado");
             }
         }
@@ -77,6 +89,7 @@ public class PlayerMove : MonoBehaviour
             Destroy(col.gameObject);
             Debug.Log("debuff no player");
             debuffTimer = debuffTimerConstant;
+            anim.SetBool("Stun", true);
         }
     }
 

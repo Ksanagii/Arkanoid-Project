@@ -9,6 +9,7 @@ TagManager:
   - ball
   - debuffer
   - Morte
+  - Points
   layers:
   - Default
   - TransparentFX
