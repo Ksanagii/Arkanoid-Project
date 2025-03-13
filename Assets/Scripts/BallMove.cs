@@ -26,6 +26,7 @@ public class BallMove : MonoBehaviour
     {
         if (col.gameObject.CompareTag("bloco1"))
         {
+            
             Destroy(col.gameObject);
             points++;
         }
@@ -39,3 +40,4 @@ public class BallMove : MonoBehaviour
     }
 
 }
+

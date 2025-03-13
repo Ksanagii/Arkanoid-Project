@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour
     {
         direction = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(vel * direction, 0);
+        
         if(death && vel > 0)
         {
             Debug.Log("morreu");
@@ -44,6 +45,12 @@ public class PlayerMove : MonoBehaviour
             
         }
 
+        if(Input.GetKeyDown(KeyCode.R) && death)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        
         if(debuffActive && !death)
         {
 
@@ -57,13 +64,7 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log("debuffer desativado");
             }
         }
-        else
-        {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+
 
     }
 
