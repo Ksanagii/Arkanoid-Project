@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     bool debuffActive;
     [HideInInspector] static public bool death;
     Animator anim;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -31,6 +30,7 @@ public class PlayerMove : MonoBehaviour
         debuffActive = false;
         anim.SetBool("Stun", false);
         vel = constantVel;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -101,6 +101,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("debuff no player");
             debuffTimer = debuffTimerConstant;
             anim.SetBool("Stun", true);
+            audioSource.Play();
         }
     }
 
